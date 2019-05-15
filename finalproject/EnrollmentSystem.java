@@ -29,13 +29,13 @@ public class EnrollmentSystem {
         System.out.println("X: Exit system");
 
         while (true) {
-            String input = s.nextLine();
+            String input = s.nextLine().toUpperCase();
 
-            if (input.toUpperCase().equals("D")) state = State.DISPLAY_ALL;
-            else if (input.toUpperCase().equals("E")) state = State.ENROLLMENT;
-            else if (input.toUpperCase().equals("L")) state = State.DISPLAY_ENROLLED;
-            else if (input.toUpperCase().equals("R")) state = State.REMOVE;
-            else if (input.toUpperCase().equals("X")) break;
+            if (input.equals("D")) state = State.DISPLAY_ALL;
+            else if (input.equals("E")) state = State.ENROLLMENT;
+            else if (input.equals("L")) state = State.DISPLAY_ENROLLED;
+            else if (input.equals("R")) state = State.REMOVE;
+            else if (input.equals("X")) break;
             else state = State.SPLASH;
 
             switch (state) {
@@ -55,8 +55,8 @@ public class EnrollmentSystem {
                 case ENROLLMENT:
                     System.out.println("Which courses do you want to enroll in? Press Q to go back.");
                     while (true) {
-                        String enrollInput = s.next();
-                        if (enrollInput.toUpperCase().equals("Q")) {
+                        String enrollInput = s.next().toUpperCase();
+                        if (enrollInput.equals("Q")) {
                             state = State.SPLASH;
                             break;
                         }
@@ -88,8 +88,8 @@ public class EnrollmentSystem {
                 case REMOVE:
                     System.out.println("Which courses do you want to drop? Press Q to go back.");
                     while (true) {
-                        String removeInput = s.next();
-                        if (removeInput.toUpperCase().equals("Q")) {
+                        String removeInput = s.next().toUpperCase();
+                        if (removeInput.equals("Q")) {
                             state = State.SPLASH;
                             break;
                         }
@@ -118,22 +118,8 @@ public class EnrollmentSystem {
         String line = r.readLine();
         while ((line = r.readLine()) != null && !line.isEmpty()) {
             String[] fields = line.split(",");
-            String topic = fields[0];
-            String number = fields[1];
-            String section = fields[2];
-            String title = fields[3];
-            String instructor = fields[4];
-            String building = fields[5];
-            String room = fields[6];
-            String creditHours = fields[7];
-            String days = fields[8];
-            String startDate = fields[9];
-            String endDate = fields[10];
-            String startTime = fields[11];
-            String endTime = fields[12];
-            String size = fields[13];
-            Course course = new Course(topic, number, section, title, instructor, building, room, creditHours, days,
-                    startDate, endDate, startTime, endTime, Integer.parseInt(size));
+            Course course = new Course(fields[0], fields[1], fields[2], fields[3], fields[4], fields[5], fields[6], fields[7],
+                                       fields[8], fields[9], fields[10], fields[11], fields[12], Integer.parseInt(fields[13]));
             courses.add(course);
         }
         r.close();
